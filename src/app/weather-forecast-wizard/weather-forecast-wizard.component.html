@@ -1,0 +1,7 @@
+<div class="panel panel-default">
+  	<div class="panel-body">
+  		<h1 class="box-heading"><span>Weather Forecast Wizard</span></h1>
+  		<app-typeahead [optionsList]="cities" (onKeyTypeEvent)="fetchCities($event)" (onOptionSelectedEvent)="onCitySelected($event)"></app-typeahead>
+		
+	</div>
+</div>

@@ -1,0 +1,29 @@
+@import "../colors.scss";
+
+
+input, ul{
+  height:40px;
+  font-size:25px;
+  width:100%;
+}
+
+ul{
+  height:auto;
+  list-style:none;
+  padding-left:0;
+  font-size:18px;
+  display:none;
+  &.results-loaded{
+    display:block;
+  }
+ >li{
+    color:$Text-Green-1;
+    background-color:$BG-Green-1;
+    &:focus>a, &:hover>a,&:focus, &:hover{
+      background-color:$BG-Green-2;
+      color:$White;
+      cursor:pointer;
+      text-decoration:none;
+    }
+  }
+}

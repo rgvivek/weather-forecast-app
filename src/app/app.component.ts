@@ -1,28 +1,14 @@
-import { Component } from '@angular/core';
-import { WeatherService } from './weather/weather.service'
+import { Component, ViewEncapsulation } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent {
-  title = 'app';
-  constructor(private _weatherService: WeatherService) { 
-  	_weatherService.getCities("syd1").subscribe(
-  		cities=>{
-  			alert(JSON.stringify(cities));
-  		}
-  	)
-
-  	_weatherService.getForecast(1105779).subscribe(
-  		forecast=>{
-  			alert(JSON.stringify(forecast));
-  		}
-  	)
-
-  	
-  }
+  
 
 }

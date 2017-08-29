@@ -1,0 +1,18 @@
+@import "./colors.scss";
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+  }
+  30% {
+    transform: scale(2.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.btn-primary{
+	background:$BG-Green-1;
+}
