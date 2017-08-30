@@ -1,6 +1,6 @@
 export class Forecast {
 	code:string;
-	date:string;
+	date:Date;
 	day:string;
 	high:number;
 	low:number;

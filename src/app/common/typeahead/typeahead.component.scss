@@ -1,24 +1,43 @@
 @import "../colors.scss";
 
+:host{
+  transform: translate(-50%);
+  left: 50%;
+  color:$Text-Green-1;
+  padding:0;
+  border-radius:4px;
+}
 
 input, ul{
   height:40px;
   font-size:25px;
   width:100%;
+  border:none;
+   border-radius:4px;
+}
+
+input{
+  padding-left:10px;
 }
 
 ul{
+  position:absolute;
   height:auto;
   list-style:none;
   padding-left:0;
   font-size:18px;
   display:none;
+  z-index:999;
   &.results-loaded{
     display:block;
   }
  >li{
-    color:$Text-Green-1;
-    background-color:$BG-Green-1;
+    background-color:$White;
+    padding: 0 10px;
+    border-bottom:1px dotted;
+    >a{
+      color:$Text-Green-1;
+    }
     &:focus>a, &:hover>a,&:focus, &:hover{
       background-color:$BG-Green-2;
       color:$White;

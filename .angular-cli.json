@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "./libs/weather-icons/css/weather-icons.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",

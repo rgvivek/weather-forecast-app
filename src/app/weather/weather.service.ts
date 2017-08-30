@@ -12,7 +12,7 @@ import { Forecast } from './forecast';
 export class WeatherService {
 	private _baseUrl:string = "https://query.yahooapis.com/v1/public/yql?q=";
 	private _getCitiesQueryTemplate:string = "select woeid,country,name from geo.places where text = 'SEARCH_STRING*' and placetype='Town'&format=json";
-	private _getForecastQueryTemplate:string ="select item from weather.forecast where woeid = WOEID_VALUE&format=json";
+	private _getForecastQueryTemplate:string ="select item from weather.forecast where woeid = WOEID_VALUE and u='c'&format=json";
 	private _alphabetOnlyRegex = /^[a-z]+$/i;
   	constructor(private _http: Http) { }
 
@@ -65,7 +65,10 @@ export class WeatherService {
 		let body = res.json();
 		let forecast:Array<Forecast> = new Array<Forecast>();
 		if(this._isValidGetForecastResponse(body)){
-			forecast = body.query.results.channel.item.forecast;
+			for(let item of body.query.results.channel.item.forecast){
+				item.date = new Date(item.date);
+				forecast.push(item);
+			}
 		}
 		return forecast;
 	}

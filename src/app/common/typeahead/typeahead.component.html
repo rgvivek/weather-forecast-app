@@ -1,5 +1,5 @@
 <div class="type-ahead-container" (window:click)="onFocusOut($event)">
-	<input (keyup)="onSearchWordTyped($event)" [(ngModel)]="searchWord" (focus)= "onFocusIn($event)">
+	<input (keyup)="onSearchWordTyped($event)" [(ngModel)]="searchWord" (focus)= "onFocusIn($event)" placeholder="Start typing to search..">
 	<ul class="type-ahead-container" [ngClass]="{'results-loaded':(focus && optionsList && optionsList.length>0)}">
 	    <li *ngFor="let option of optionsList; let i=index" tabindex="1" (focus)= "focus=true;" (keyup)="onKeyPress($event, i)" (click)="onOptionSelected(option)"><a href="#">{{option.displayName}}</a></li>
 	</ul>

@@ -1,7 +1,18 @@
+<img class="wizard-background">
 <div class="panel panel-default">
   	<div class="panel-body">
   		<h1 class="box-heading"><span>Weather Forecast Wizard</span></h1>
-  		<app-typeahead [optionsList]="cities" (onKeyTypeEvent)="fetchCities($event)" (onOptionSelectedEvent)="onCitySelected($event)"></app-typeahead>
-		
+  		<app-typeahead class="col-xs-11" [optionsList]="cities" (onKeyTypeEvent)="fetchCities($event)" (onOptionSelectedEvent)="onCitySelected($event)"></app-typeahead>
+		<div *ngIf="forecasts">
+			<h3>Forecast for {{selectedCity}}</h3>
+			<div *ngFor="let forecast of forecasts; let i= index;">
+				<div class="forecast-section" *ngIf="i<5">
+					<div class="col-xs-3 forecast-date">{{forecast.date|date:'EEEE'}}</div>
+					<div class="col-xs-5 forecast-display"><i class="wi {{getIcon(forecast.code)}}"></i><span class="forecast-text">{{forecast.text}}</span></div>
+					<div class="col-xs-2">{{forecast.high}}&deg;</div>
+					<div class="col-xs-2">{{forecast.low}}&deg;</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
