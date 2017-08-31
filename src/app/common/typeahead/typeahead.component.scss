@@ -3,7 +3,7 @@
 :host{
   transform: translate(-50%);
   left: 50%;
-  color:$Text-Green-1;
+  color:$White;
   padding:0;
   border-radius:4px;
 }
@@ -18,6 +18,11 @@ input, ul{
 
 input{
   padding-left:10px;
+  background:transparent;
+  border:2px solid $White;
+  &:focus{
+    outline:none;
+  }
 }
 
 ul{
@@ -28,18 +33,21 @@ ul{
   font-size:18px;
   display:none;
   z-index:999;
+  border-radius:5px;
+  border: 2px solid $White;
   &.results-loaded{
     display:block;
   }
  >li{
-    background-color:$White;
+    background-color:$BG-Grey-1;
     padding: 0 10px;
-    border-bottom:1px dotted;
+    border-bottom:1px dotted $Text-Grey-1;
     >a{
-      color:$Text-Green-1;
+      color:$Text-Grey-1;
     }
     &:focus>a, &:hover>a,&:focus, &:hover{
-      background-color:$BG-Green-2;
+      background-color:$Text-Grey-1;
+      outline:none;
       color:$White;
       cursor:pointer;
       text-decoration:none;

@@ -17,6 +17,7 @@ export class WeatherService {
   	constructor(private _http: Http) { }
 
   	getCities(searchWord:string):Observable<any>{
+    	/* Validate search string and call yahoo weather service to get cities */
   		if(!!searchWord && searchWord.length > 2 && this._alphabetOnlyRegex.test(searchWord)){
   			let queryString = this._getCitiesQueryTemplate.replace('SEARCH_STRING', searchWord);
   			return this._http.get( `${this._baseUrl}${queryString}`).map(this._extractCities.bind(this))
@@ -26,6 +27,7 @@ export class WeatherService {
   	}
 
   	getForecast(woeid:number):Observable<any>{
+    	/* Validate woeid and call yahoo weather service to get forecast */
   		if(!!woeid){
   			let queryString = this._getForecastQueryTemplate.replace('WOEID_VALUE', woeid.toString());
   			return this._http.get( `${this._baseUrl}${queryString}`).map(this._extractForecast.bind(this))
@@ -34,11 +36,13 @@ export class WeatherService {
   		return Observable.empty();
   	}
 
+    /* Method to extract cities from response */
   	private _extractCities(res: Response):Array<City> {
 		let body = res.json();
 		let cities:Array<City> = new Array<City>();
 		if(this._isValidGetCitiesResponse(body)){
 			let result = body.query.results.place;
+    		/* Response can be array or a single object - extract based on the type of response */
 			if(result instanceof Array){
 				for(let city of result){
 					cities.push(this._extractCity(city));
@@ -50,10 +54,12 @@ export class WeatherService {
 		return cities;
 	}
 
+    /* Method to validate json response structure */
 	private _isValidGetCitiesResponse(resBody:any):boolean{
 		return !!resBody && !!resBody.query && !!resBody.query.results && !!resBody.query.results.place;
 	}
 
+    /* Method to extract city from raw response */
 	private _extractCity(rawCity:any):City{
 		let city:City = new City();
 		city.displayName = `${rawCity.name}, ${rawCity.country.content}`;
@@ -61,10 +67,12 @@ export class WeatherService {
 		return city;
 	}
 
+    /* Method to extract forecast from response */
 	private _extractForecast(res: Response):Array<Forecast> {
 		let body = res.json();
 		let forecast:Array<Forecast> = new Array<Forecast>();
 		if(this._isValidGetForecastResponse(body)){
+    		/* Convert date string to date object for display */
 			for(let item of body.query.results.channel.item.forecast){
 				item.date = new Date(item.date);
 				forecast.push(item);
@@ -73,10 +81,12 @@ export class WeatherService {
 		return forecast;
 	}
 
+    /* Method to validate json response structure */
 	private _isValidGetForecastResponse(resBody:any):boolean{
 		return !!resBody && !!resBody.query && !!resBody.query.results && !!resBody.query.results.channel && !!resBody.query.results.channel.item && !!resBody.query.results.channel.item.forecast;
 	}
 
+    /* Method to handle error */
 	private _handleError (error: Response | any) {
 		let errMsg: string;
 		if (error instanceof Response) {

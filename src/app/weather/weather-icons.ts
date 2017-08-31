@@ -23,7 +23,7 @@ export class WeatherIcons {
 		"20":"wi-smog",
 		"21":"wi-smoke",
 		"22":"wi-dust",
-		"23":"wi-wind",
+		"23":"wi-windy",
 		"24":"wi-windy",
 		"25":"wi-snowflake-cold",
 		"26":"wi-night-cloudy-high",

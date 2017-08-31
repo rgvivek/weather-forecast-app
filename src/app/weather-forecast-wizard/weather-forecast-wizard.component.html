@@ -6,12 +6,15 @@
 		<div *ngIf="forecasts">
 			<h3>Forecast for {{selectedCity}}</h3>
 			<div *ngFor="let forecast of forecasts; let i= index;">
-				<div class="forecast-section" *ngIf="i<5">
+				<div class="forecast-section" *ngIf="i<count">
 					<div class="col-xs-3 forecast-date">{{forecast.date|date:'EEEE'}}</div>
 					<div class="col-xs-5 forecast-display"><i class="wi {{getIcon(forecast.code)}}"></i><span class="forecast-text">{{forecast.text}}</span></div>
 					<div class="col-xs-2">{{forecast.high}}&deg;</div>
 					<div class="col-xs-2">{{forecast.low}}&deg;</div>
 				</div>
+			</div>
+			<div class="link-section">
+				<span class="link" [ngClass]="{'active':(count==5)}" (click)="count=5">5d</span>|<span class="link" [ngClass]="{'active':(count==10)}" (click)="count=10">10d</span>
 			</div>
 		</div>
 	</div>

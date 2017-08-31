@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpModule, Http, XHRBackend, ResponseOptions, Response, Headers } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { City } from './city';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 
@@ -26,13 +27,15 @@ describe('WeatherService', () => {
 			"query":{
 				"results":{
 					"place":[ 
-						{"name":"Sydney","country":{"code":"AU","type":"Country","woeid":"23424748","content":"Australia"},"woeid":"1105779"}
+						{"name":"Sydney","country":{"code":"AU","type":"Country","woeid":"23424748","content":"Australia"},"woeid":1105779}
 					]
 				}
 			}
 		};
-
-		const expectedResult = [{ displayName: 'Sydney, Australia', woeid: '1105779' }];
+		let city = new City();
+		city.displayName = 'Sydney, Australia';
+		city.woeid =1105779;
+		const expectedResult = [city];
 
 		mockBackend.connections.subscribe((connection) => {
 	    	connection.mockRespond(new Response(new ResponseOptions({
@@ -115,8 +118,8 @@ describe('WeatherService', () => {
 			}
 		};
 
-		const expectedResult = [{"code":"30","date":"30 Aug 2017","day":"Wed","high":"63","low":"40","text":"Partly Cloudy"},
-								{"code":"34","date":"31 Aug 2017","day":"Thu","high":"65","low":"43","text":"Mostly Sunny"}];
+		const expectedResult = [{"code":"30","date":new Date("30 Aug 2017"),"day":"Wed","high":"63","low":"40","text":"Partly Cloudy"},
+								{"code":"34","date":new Date("31 Aug 2017"),"day":"Thu","high":"65","low":"43","text":"Mostly Sunny"}];
 
 		mockBackend.connections.subscribe((connection) => {
 	    	connection.mockRespond(new Response(new ResponseOptions({
